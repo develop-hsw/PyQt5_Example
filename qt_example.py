@@ -10,6 +10,7 @@ import sys
 import os
 from collections import deque
 
+
 path = './sample_imgs/'
 form_class = uic.loadUiType("qt_designer.ui")[0]
 
@@ -18,11 +19,12 @@ running_state = False
 class Thread1(QThread):
     def run(self):
         count = 0
-        while count < 5:
+        while count < 10:
             time.sleep(1)
             print("count", count)
+            deque.appendleft(count)
             count += 1
-            if(count == 5):
+            if(count == 10):
                 count = 0
 
 
@@ -59,8 +61,8 @@ class Ui_Dialog(QDialog, form_class) :
 
     a, b = 0, 1
     def fibonacci(self):
-        for i in range(1000000):
-            if(i % 10 == 0):
+        for i in range(100000):
+            if(i % 1000 == 0):
                 print(i)
         if running_state == True :
             self.timer.start(1000 * 1)  # 1초마다 타이머 실행, 시작
